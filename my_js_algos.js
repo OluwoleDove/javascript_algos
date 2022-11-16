@@ -1,4 +1,5 @@
 var center = require('center-align');
+const prompt = require("prompt-sync")({ sigint: true });
 const fs = require('fs');
 
 var i = j = "";
@@ -16,7 +17,7 @@ function even_odd(i, j){
         i = k;
     }
     
-    console.log(("ITERATING BETWEEN {0}&&{1}").format(i, j))
+    console.log("ITERATING BETWEEN %s and %s", i, j);
     let return_array = [];
     let odd_num_array = []; //An empty list
     let even_num_count = 0; //integer value for even number counts initialized to zero
@@ -29,12 +30,12 @@ function even_odd(i, j){
     }
     return_array.push(odd_num_array);
     return_array.push(even_num_count);
-    return return_array;
+    return(return_array);
 }
 
 /*PROGRAM TO PRINT TRIANGLE OF CHARACTERS*/
 function char_tri(char, lim){
-    char = char.toString;
+    char = char.toString();
     if (char == "" || char == " ")
         console.log("Your first input can't be empty");
     else if( isNaN(parseInt(lim)) )
@@ -42,14 +43,14 @@ function char_tri(char, lim){
 
     lim = parseInt(lim);
     console.log("\nPRINTING A TRIANGLE OF CHARACTERS BY CALLING PRINT METHOD ONCE");
-    str_out = "";
-    main_str = "";
+    let str_out = "";
+    let main_str = "";
 
-    for (let i = 1; i <= lim.length; i++) {
+    for (let i = 1; i <= lim; i++) {
         str_out += char;
         main_str += str_out + "\n";
     }
-    return main_str;
+    return(main_str);
 }
 
 function check_anagram(A, B){
@@ -59,18 +60,18 @@ function check_anagram(A, B){
     console.log();
 
     for (let i = 0; i < A.length; i++){ //Iteratively select each element in Array A
-        for (let j = 0; index < A[i].length; j++){ //Iteratively select the letters in each element
-            for (let k = 0; index < B[i].length; k++){ //Check for the letter in an element in B that has the same index as that of A
+        for (let j = 0; j < A[i].length; j++){ //Iteratively select the letters in each element
+            for (let k = 0; k < B[i].length; k++){ //Check for the letter in an element in B that has the same index as that of A
                 if ( A[i][j] == B[i][k] ){
                     count = count + 1;
                     break;
                 }
             }
         }
-        C.push(count == len(B[i]));
+        C.push(count == B[i].length);
         count = 0;
     }
-    return C
+    return(C)
 }
 
 //SORTING FUNCTION
@@ -87,7 +88,7 @@ function _bubble_sort(my_array){
             }
         }
     }
-    
+
     fs.writeFile('sorted.txt', my_array, (err) => {   
         // In case of a error throw err.
         if (err) throw err;
@@ -96,9 +97,9 @@ function _bubble_sort(my_array){
     fs.open('sorted.txt', 'r', function (err, mydata) {
         if (err) throw err;
         sorted_array = mydata;
-    });
 
-    return sorted_array;
+        return(sorted_array);
+    });
 }
 
 //MULTIPLICATION TABLE
@@ -108,27 +109,28 @@ function multi_table(n){
         console.log("Integer value alone please");
    
     console.log("PRINTING MULTIPLICATION TABLE HORIZONTALLY");
-    num = 0;
-    out_str = ""; //Initializing output string
+    let num = 0;
+    let out_str = ""; //Initializing output string
     //Below are 12 instances of i&&144 instances of j
    
-    console.log("\nPRINTINF TABLES VERTICALLY");
+    console.log("\nPRINTING TABLES VERTICALLY");
     for (let i = 1; i <= n; i++) {
-        for (let j = 1; i <= j; j++) {
+        for (let j = 1; j <= n; j++) {
             num = i*j;
-            out_str += str(i) + " * " + str(j) + " = " + str(num) + "\n";
-        }   
+            out_str += i.toString() + " * " + j.toString() + " = " + num.toString() + "\n";
+        }
+        out_str += "\n";   
     }    
     console.log(out_str);
     out_str = ""; //After eact complete j iterations, initialize output string again
     console.log();
-    console.log('\nYou can also have it side by side\n');
+    console.log("\nYou can also have it side by side\n");
     console.log("PRINTING 9 BY 12 MULTIPLICATION TABLE SIDE BY SIDE");
 
     for (let i = 1; i <= 13; i++) {
-        for (let j = 1; i <= 13; j++) {
+        for (let j = 1; j <= 13; j++) {
             num = j*i;
-            out_str += str(j) + "*" + str(i) + "=" + str(num) + "\t\t";
+            out_str += j.toString() + "*" + i.toString() + "=" + num.toString() + "\t\t";
         }
         console.log(out_str);
         out_str = ""; //After each complete j iterations, initialize output string again 
@@ -136,9 +138,9 @@ function multi_table(n){
 }
 
 function determine_palindrome(palindrome){
-    iter_count = Math.floor(palindrome.length/2); //Floor division
-    truth_array = [];
-    neg = -1;
+    let iter_count = Math.floor(palindrome.length/2); //Floor division
+    var truth_array = [];
+    var neg = -1;
     for (let x = 0; x < iter_count; x++) {
         //Comapre letters&&append the boolean outcomes to the list
         truth_array.push(palindrome[x] == palindrome[neg]);
@@ -146,9 +148,9 @@ function determine_palindrome(palindrome){
     }
     console.log(truth_array);
     if ( false in truth_array )
-        console.log(("{0} is not a palindrome").format(palindrome));
+        console.log("%s is not a palindrome", palindrome);
     else
-        console.log(("{0} is a palindrome").format(palindrome));
+        console.log("%s is a palindrome", palindrome);
 }
 
 function find_prefix(_array){
@@ -180,33 +182,33 @@ function find_prefix(_array){
             pref += letter;
         count = 0;
     }
-    return pref
+    return(pref)
 }
 
 //FACTORIAL FUNCTION
 function factorial(n){
     if(n == 0){
-        return 1;
+        return(1);
     }
     else{
-        return (n * factorial(n-1));
+        return(n * factorial(n-1));
     }
 }      
 //FIBONACCI SERIES - THE RECURSIVE WAY
 function fibonacci(n){
     if(n == 0 || n == 1){
-        return n;
+        return(n);
     }
     else{
-        return fibonacci(n-1) + fibonacci(n-2);
+        return(fibonacci(n-1) + fibonacci(n-2));
     }
 }
 
 //COMBINATION FUNCTION CALLING FACTORIAL FUNCTION
 function combination(n, r){
     let c_val = factorial(n)/(factorial(n-r)*factorial(r));
-    let int_val = parseparseInt(c_val);
-    return int_val;
+    let int_val = parseInt(c_val);
+    return(int_val);
 }
 
 //PASCAL_T FUNCTIOIN CALLS COMBINATION FUNCTION
@@ -217,63 +219,63 @@ function pascal_T(n){
         val = combination(n, j);
         my_str += val.toString() + "     ";
     }
-    return my_str;
+    return(my_str);
 }
 
 //THIS FUNCTION CALLS OTHER FUNCTIONS
 function test_algo(){
     //EXECUTING EVEN_ODD FUNCTION
     console.log("THIS PROGRAM OUTPUTS THE ODD NUMBERS&&THE COUNT OF EVEN BETWEEN TWO INTEGERS");
-    i = parseInt(prompt("The first integer number please{ "));
-    j = parseInt(prompt("Your second integer number{ "));
-    even_odd_array = even_odd(i, j);
-    console.log(("The odd numbers are{ \n{0} \nThe range contains {1} even numbers").format(even_odd_array[0], even_odd_array[1]));
+    let i = parseInt(prompt("The first integer number please: "));
+    let j = parseInt(prompt("Your second integer number: "));
+    let even_odd_array = even_odd(i, j);
+    console.log("The odd numbers are: \n%s \nThe range contains %s even numbers", even_odd_array[0], even_odd_array[1]);
     console.log();
 
     //CALLING FUNCTION TO PRINT TRIANGLE OF CHARACTERS
     console.log("LET'S HAVE A TRIANGLE OF CHARACTERS, SHALL WE?");
     i = prompt("Type a character please: ");
-    j = prompt("Type an integer please: ");
+    j = parseInt(prompt("Type an integer please: "));
     triangle = char_tri(i, j);
     console.log(triangle +'\n');
 
     //LET'S PRINT MULTIPLICATION TABLES
     console.log("\nLET'S GENERATE MULTIPLICATION TABLE");
     i = prompt("Enter an integer number ");
-    multi_table(Maths.abs(parseInt(i)));
+    multi_table(Math.abs(parseInt(i)));
 
     //PROGRAM ANAGRAM
     //Anagrams are words that are made up of the same letters but have different meanings
-    console.log("THIS PROGRAM COMPARES TWO LISTS TO CHECK FOR ANAGRAMS\n Examples{")
-    A = ["abode", "man", "live", "heart", "ear"]
-    B = ["adobe", "nan", "evil", "earth", "car"]
+    console.log("THIS PROGRAM COMPARES TWO LISTS TO CHECK FOR ANAGRAMS \nExamples:")
+    let A = ["abode", "man", "live", "heart", "ear"]
+    let B = ["adobe", "nan", "evil", "earth", "car"]
     console.log('A = ["abode", "man", "live", "heart", "ear"]\nB = ["adobe", "nan", "evil", "earth", "car"]\n')
     //declare an empty list
-    anagram_check = check_anagram(A, B)
+    let anagram_check = check_anagram(A, B)
     console.log(anagram_check)
     console.log()
 
     //PRINTING THE LONGEST PREFIX
-    word_array = ["flower", "flow", "flight", "floor", "flood"]
+    let word_array = ["flower", "flow", "flight", "floor", "flood"]
     console.log("\nChecking the longest prefix in the list")
     _prefix = find_prefix(word_array)
-    console.log(("Longest Prefix is {0}").format(_prefix))
+    console.log("Longest Prefix is %s", _prefix);
 
     //PRINTING FACTORIAL
-    user_input = parseInt(prompt("Type a number to print it's factorial{ "))
+    user_input = parseInt(prompt("Type a number to print it's factorial: "))
     console.log("PRINTING FACTORIAL")
     console.log(factorial(user_input))
     console.log()
 
     //ITERATIVELY GENERATING FIBONACCI SERIES
     console.log("LET'S ITERATIVELY PRINT FIRST 10 NUMBERS OF THE FIBONACCI SERIES")
-    fib_array = [0]
-    new_item = 1
+    let fib_array = [0];
+    let new_item = 1;
     if (fib_array.length < 2){
         fib_array.push(new_item)
         while (fib_array.length < 10) {
-            new_item = fib_array[-1] + fib_array[-2]
-            fib_array.push(new_item)
+            new_item = parseInt(fib_array[-1]) + parseInt(fib_array[-2]);
+            fib_array.push(new_item);
         }
     }
     console.log(fib_array)
@@ -282,36 +284,36 @@ function test_algo(){
     //fib_series CODE
     console.log("\nNOW LET'S DO IT THE RECURSION WAY")
     fib_series = []
-    user_input = parseInt(prompt("Type a number{ "))
+    user_input = parseInt(prompt("Type a number: "))
     for (let i = 0; i < user_input.length; i++) {
         fib_series.push(fibonacci(i))
     }
     //LET'S PRINT STUFF
     console.log("PRINTING FIBONACCI")
     console.log(fib_series)     
-    user_input = parseInt(prompt("Type a number, let's get the Fibonacci value{ "))   
-    console.log(fibonacci(user_input))
-    console.log()
+    user_input = parseInt(prompt("Type a number, let's get the Fibonacci value: "))   
+    console.log(fibonacci(user_input));
+    console.log();
 
     //PROGRAM PALINDROME - A Palindrome is a word that spells the same in the same direcion
     //Examples are level, racecar, saippuakivikauppias
-    console.log("THIS PROGRAM CHECKS IF A WORD IS A PALINDROME")
-    console.log("A Palindrome is a word that spells the same in both directions.\n")
-    word_strng = prompt("Type a word: ")
-    result = determine_palindrome(word_strng)
+    console.log("THIS PROGRAM CHECKS IF A WORD IS A PALINDROME");
+    console.log("A Palindrome is a word that spells the same in both directions.\n");
+    word_strng = prompt("Type a word: ");
+    result = determine_palindrome(word_strng);
 
     //PROGRAM SORT LIST
-    console.log("THIS FUNTION SORTS A Array IN ASCENDING ORDER")
-    console.log()
+    console.log("THIS FUNCTION SORTS AN ARRAY IN ASCENDING ORDER");
+    console.log();
 
-    my_array = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0, -1, -2, -3, -4, -5, -6, -7, -8, -9]
-    console.log(('Sorting this list\n {0}').format(my_array))
-    my_sorted_array = _bubble_sort(my_array)
-    console.log(my_sorted_array)
+    my_array = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0, -1, -2, -3, -4, -5, -6, -7, -8, -9];
+    console.log('Sorting this list\n %s', my_array);
+    my_sorted_array = _bubble_sort(my_array);
+    console.log(my_sorted_array);
 
     //This program prints Pascal Triangle
-    console.log("PRINTING PASCAL'S TRAINGLE")
-    user_input = parseInt(prompt("Type an integer number{ "))
+    console.log("PRINTING PASCAL'S TRIANGLE")
+    user_input = parseInt(prompt("Type an integer number "))
     for (let i = 0; i<user_input; i++){
         console.log(center(pascal_T(i), 80));
     }
@@ -322,7 +324,7 @@ function test_algo(){
     let new_array = new Array()
     let pascal_obj = new Object()
     pascal_tri = ''
-    user_input = parseInt(prompt("Type a number{ "))
+    user_input = parseInt(prompt("Type a number "))
     for ( let i=1; i <= user_input+1; i++ ){
         col_array.push(unit_num)
         //Just using i to guage row lengths
@@ -361,7 +363,7 @@ function test_algo(){
     console.log(pascal_tri)
 }
 
-check = prompt("Let's Start, shall we? Type 'Y' to start&&'N' to quit.\n");
+check = prompt("Let's Start, shall we? Type 'Y' to start and 'N' to quit.\n");
 
 while( check == "Y" || check == "y" ){
     test_algo();
