@@ -1,6 +1,7 @@
 var center = require('center-align');
 const prompt = require("prompt-sync")({ sigint: true });
 const fs = require('fs');
+var fr = new FileReader();
 
 var i = j = "";
 /*SOME ALGORITHMS I WROTE IN PYTHON */
@@ -89,7 +90,7 @@ function _bubble_sort(my_array){
         }
     }
 
-    fs.writeFile('sorted.txt', my_array, (err) => {   
+    fs.writeFile('sorted.txt', my_array.toString(), (err) => {   
         // In case of a error throw err.
         if (err) throw err;
     })
@@ -271,22 +272,22 @@ function test_algo(){
     console.log("LET'S ITERATIVELY PRINT FIRST 10 NUMBERS OF THE FIBONACCI SERIES")
     let fib_array = [0];
     let new_item = 1;
-    if (fib_array.length < 2){
+    if (fib_array.length < 2) {
         fib_array.push(new_item)
         while (fib_array.length < 10) {
-            new_item = parseInt(fib_array[-1]) + parseInt(fib_array[-2]);
+            new_item = parseInt(fib_array[fib_array.length-1]) + parseInt(fib_array[fib_array.length-2]);
             fib_array.push(new_item);
         }
     }
-    console.log(fib_array)
-    console.log()
+    console.log(fib_array);
+    console.log();
 
     //fib_series CODE
-    console.log("\nNOW LET'S DO IT THE RECURSION WAY")
-    fib_series = []
-    user_input = parseInt(prompt("Type a number: "))
-    for (let i = 0; i < user_input.length; i++) {
-        fib_series.push(fibonacci(i))
+    console.log("\nNOW LET'S DO IT THE RECURSION WAY");
+    fib_series = [];
+    user_input = parseInt(prompt("Type a number: "));
+    for (let i = 0; i < user_input; i++) {
+        fib_series.push(fibonacci(i));
     }
     //LET'S PRINT STUFF
     console.log("PRINTING FIBONACCI")
@@ -329,14 +330,12 @@ function test_algo(){
         col_array.push(unit_num)
         //Just using i to guage row lengths
         if (col_array.length == i) {
-            pascal_obj.key = i;
-            pascal_obj.val = col_array;
-            pascal_obj.push(obj_elem);
+            pascal_obj.assign({i : col_array});
             col_array = [];
         }
         else if( col_array.length/2 == 1){
             col_array.push(unit_num)
-            pascal_obj.push(obj_elem)
+            pascal_obj.assign({i : col_array})
         }
         else{
             col_array = []
@@ -346,14 +345,14 @@ function test_algo(){
                 col_array.push(new_array[j] + new_array[j+1])
             }
             col_array.push(1)
-            pascal_obj.push(obj_elem)
+            pascal_obj.assign({i : col_array})
             col_array = []
         }
     }
     console.log(pascal_obj)
     console.log()
     console.log("PASCAL'S TRANGLE")
-    for (let k = 1; k <= pascal_obj; k++){
+    for (let k = 1; k <= pascal_obj.length; k++){
         for (let num = 0; mum < pascal_obj[k].length; num++){
             col_str += '  ' + pascal_obj[k][num].center(40);
         }
