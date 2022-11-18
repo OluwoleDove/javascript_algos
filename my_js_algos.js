@@ -215,7 +215,7 @@ function pascal_T(n){
 //THIS FUNCTION CALLS OTHER FUNCTIONS
 function test_algo(){
     //EXECUTING EVEN_ODD FUNCTION
-    console.log("THIS PROGRAM OUTPUTS THE ODD NUMBERS&&THE COUNT OF EVEN BETWEEN TWO INTEGERS");
+    console.log("THIS PROGRAM OUTPUTS THE ODD NUMBERS AND THE COUNT OF EVEN BETWEEN TWO INTEGERS");
     let i = parseInt(prompt("The first integer number please: "));
     let j = parseInt(prompt("Your second integer number: "));
     let even_odd_array = even_odd(i, j);
