@@ -12,3 +12,10 @@ The Code does the following:
 - Outputs the factorial of an integer
 - Iteratively and Recursively Prints out pascal triangle
 - Finds the longest prefix in a list of words
+
+STEP
+Install nodeJS to run code
+Install the dependencies in package.json in the project's directory
+ - npm i center-align
+ - npm i prompt-sync
+Then load your CLI and run <node my_js_algos.js>

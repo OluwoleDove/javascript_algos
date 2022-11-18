@@ -1,7 +1,6 @@
 var center = require('center-align');
 const prompt = require("prompt-sync")({ sigint: true });
 const fs = require('fs');
-var fr = new FileReader();
 
 var i = j = "";
 /*SOME ALGORITHMS I WROTE IN PYTHON */
@@ -77,9 +76,6 @@ function check_anagram(A, B){
 
 //SORTING FUNCTION
 function _bubble_sort(my_array){
-    fs.open('sorted.txt', 'w', function (err) {
-        if (err) throw err;
-    });
     for (let i = 0; i < my_array.length-1; i++){
         for (let j = 0; j < my_array.length-1; j++){
             if ( my_array[j+1] < my_array[j] ) {
@@ -90,17 +86,10 @@ function _bubble_sort(my_array){
         }
     }
 
-    fs.writeFile('sorted.txt', my_array.toString(), (err) => {   
-        // In case of a error throw err.
-        if (err) throw err;
-    })
-    
-    fs.open('sorted.txt', 'r', function (err, mydata) {
-        if (err) throw err;
-        sorted_array = mydata;
+    fs.writeFileSync('sorted.txt', my_array.toString());
+    const result = fs.readFileSync('sorted.txt', 'utf8');
 
-        return(sorted_array);
-    });
+    return(result.toString());
 }
 
 //MULTIPLICATION TABLE
@@ -141,14 +130,14 @@ function multi_table(n){
 function determine_palindrome(palindrome){
     let iter_count = Math.floor(palindrome.length/2); //Floor division
     var truth_array = [];
-    var neg = -1;
+    var neg = 1;
     for (let x = 0; x < iter_count; x++) {
         //Comapre letters&&append the boolean outcomes to the list
-        truth_array.push(palindrome[x] == palindrome[neg]);
-        neg -= 1;
+        palindrome[x] == palindrome[palindrome.length - neg] ? truth_array.push(true) : truth_array.push(false);
+        neg += 1;
     }
     console.log(truth_array);
-    if ( false in truth_array )
+    if ( truth_array.includes(false) )
         console.log("%s is not a palindrome", palindrome);
     else
         console.log("%s is a palindrome", palindrome);
@@ -324,42 +313,43 @@ function test_algo(){
     let col_array = []
     let new_array = new Array()
     let pascal_obj = new Object()
-    pascal_tri = ''
+    let pascal_tri = ''
     user_input = parseInt(prompt("Type a number "))
     for ( let i=1; i <= user_input+1; i++ ){
         col_array.push(unit_num)
         //Just using i to guage row lengths
         if (col_array.length == i) {
-            pascal_obj.assign({i : col_array});
+            Object.assign(pascal_obj, {[i] : col_array});
             col_array = [];
         }
         else if( col_array.length/2 == 1){
-            col_array.push(unit_num)
-            pascal_obj.assign({i : col_array})
+            col_array.push(unit_num);
+            Object.assign(pascal_obj, {[i] : col_array});
         }
         else{
-            col_array = []
-            col_array.push(1)
+            col_array = [];
+            col_array.push(1);
             new_array = pascal_obj[i-1]
             for (let j = 0; j < new_array.length - 1; j++){
                 col_array.push(new_array[j] + new_array[j+1])
             }
             col_array.push(1)
-            pascal_obj.assign({i : col_array})
+            Object.assign(pascal_obj, {[i] : col_array});
             col_array = []
         }
     }
-    console.log(pascal_obj)
-    console.log()
-    console.log("PASCAL'S TRANGLE")
-    for (let k = 1; k <= pascal_obj.length; k++){
-        for (let num = 0; mum < pascal_obj[k].length; num++){
-            col_str += '  ' + pascal_obj[k][num].center(40);
+    console.log(pascal_obj);
+    console.log();
+    console.log("PASCAL'S TRANGLE");
+    for (let k = 1; k <= user_input; k++){
+        let col_str = '';
+        k = k.toString();
+        for (let num = 0; num < pascal_obj[k].length; num++){
+            col_str += '  ' + pascal_obj[k][num];
         }
-        col_str = center(pascal_T(i), 40);
         pascal_tri += col_str + "\n"
     }
-    console.log(pascal_tri)
+    console.log(center(pascal_tri, 80));
 }
 
 check = prompt("Let's Start, shall we? Type 'Y' to start and 'N' to quit.\n");
