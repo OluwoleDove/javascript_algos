@@ -3,9 +3,9 @@ const prompt = require("prompt-sync")({ sigint: true });
 const fs = require('fs');
 
 var i = j = "";
-/*SOME ALGORITHMS I WROTE IN PYTHON */
+/*SOME ALGORITHMS I WROTE IN JAVASCRIPT */
 
-//THIS PROGRAM TAKES TWO INTEGER NUMBERS&&RETURNS A Array OF ODD NUMBERS 
+//THIS PROGRAM TAKES TWO INTEGER NUMBERS AND RETURNS AN ARRAY OF ODD NUMBERS 
 //AND A COUNT OF EVEN NUMBERS BETWEEN THE INTEGERS
 function even_odd(i, j){
     if(isNaN(i) && isNaN(j)){
