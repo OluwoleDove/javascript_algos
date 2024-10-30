@@ -16,6 +16,7 @@ The Code does the following:
 STEP
 Install nodeJS to run code
 Install the dependencies in package.json in the project's directory
+ - npm install express
  - npm i center-align
  - npm i prompt-sync
 Then load your CLI and run <node my_js_algos.js>

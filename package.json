@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "center-align": "^1.0.1",
+    "express": "^4.21.1",
     "prompt-sync": "^4.2.0"
   }
 }
