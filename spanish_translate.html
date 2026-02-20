@@ -1,0 +1,19 @@
+<!-- Center: Language Switcher -->
+            <div class="gtranslate_wrapper"></div>
+            <script>window.gtranslateSettings = {"default_language":"en","native_language_names":true,"detect_browser_language":true,"languages":["en","es"],"wrapper_selector":".gtranslate_wrapper","flag_size":32,"flag_style":"3d","alt_flags":{"en":"usa"}}</script>
+            <script src="https://cdn.gtranslate.net/widgets/latest/fn.js" defer></script>
+this is the CSS part
+/* Force GTranslate text to white */
+.gtranslate_wrapper * {
+    color: var(--light) !important;  
+}
+
+/* Optional: remove underline on hover */
+.gtranslate_wrapper a {
+    text-decoration: none !important;
+}
+
+/* Optional: subtle hover effect */
+.gtranslate_wrapper a:hover {
+    color: var(--background) !important; /* Bootstrap warning/yellow */
+}
